@@ -4,15 +4,18 @@ set -euo pipefail
 # Ask for the project name
 read -p "Enter your project name: " project_name
 
+project_base="project"
+script_project="${project_base}/${project_name}"
+
 # Create project folder structure within the workspace
-mkdir -p "${project_name}/src/"
-mkdir -p "${project_name}/data/"
-mkdir -p "${project_name}/notebooks/"
-mkdir -p "${project_name}/scripts/"
+mkdir -p "${script_project}/src/"
+mkdir -p "${script_project}/generated_data/"
+mkdir -p "${script_project}/notebooks/"
+mkdir -p "${script_project}/scripts/"
 
 # Initialize a git repository if one doesn't already exist
-if [ ! -d "${project_name}/.git" ]; then
-    cd "${project_name}"
+if [ ! -d "${script_project}/.git" ]; then
+    cd "${script_project}"
     git init
     cd ..
     echo "Initialized a new Git repository in ${project_name}/"
@@ -21,24 +24,24 @@ else
 fi
 
 # Create a .gitignore file with entries for folders that should be ignored
-gitignore_file="${project_name}/.gitignore"
-cat <<EOF > "$gitignore_file"
-# Ignore permanent storage for datasets
-permanent_storage/
-
-# Ignore settings reference (for previous docker file configurations)
-Settings reference/
-
+gitignore_file="${script_project}/.gitignore"
+if [ ! -f "$gitignore_file" ]; then
+    cat <<EOF > "$gitignore_file"
 # Common Python and system files
 __pycache__/
 *.py[cod]
 *.so
 .DS_Store
+# Ignore generated data folder
+generated_data/
 EOF
-echo "Created .gitignore in ${project_name}/"
+    echo "Created .gitignore in ${project_name}/"
+else
+    echo ".gitignore already exists in ${project_name}/"
+fi
 
 # Create a .pre-commit-config.yaml for pre-commit hooks for R and Python
-cat <<'EOF' > "${project_name}/.pre-commit-config.yaml"
+cat <<'EOF' > "${script_project}/.pre-commit-config.yaml"
 repos:
   - repo: https://github.com/psf/black
     rev: 23.1.0  # Use the version appropriate for your project
@@ -54,13 +57,13 @@ repos:
         language: system
         files: "\\.R$"
 EOF
-echo "Created .pre-commit-config.yaml in ${project_name}/"
+echo "Created .pre-commit-config.yaml in ${script_project}/"
 
 # Optionally, create a basic README.md
 read -p "Would you like to create a README.md for the project? (y/n): " create_readme
 if [[ "$create_readme" =~ ^[Yy]$ ]]; then
     read -p "Enter a short project description: " description
-    cat <<EOF > "${project_name}/README.md"
+    cat <<EOF > "${script_project}/README.md"
 # ${project_name}
 
 ${description}
@@ -73,7 +76,7 @@ ${description}
 - scripts/    : Utility scripts
 
 EOF
-    echo "README.md created for ${project_name}"
+    echo "README.md created for ${script_project}"
 fi
 
 # -------------------------------------------
