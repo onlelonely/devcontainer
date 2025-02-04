@@ -63,7 +63,7 @@ case "$1" in
         package="${parsed#*:}"
         
         # Use the retry-enabled install_packages function
-        install_packages install -y -n base "$package"
+        install_packages "$package"
         
         # Check for save flag and add package to the correct category section in setup_extended.sh
         if [[ "${3-}" == "-s" ]] || [[ "${3-}" == "--save" ]]; then
