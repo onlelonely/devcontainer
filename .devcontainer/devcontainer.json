@@ -1,0 +1,86 @@
+{
+    "name": "Data Science (Python and R)",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+    "context": "../..",
+    "workspaceFolder": "/workspace",
+    "features": {
+        "ghcr.io/mamba-org/devcontainer-features/micromamba:1": {
+            "version": "latest",
+            "channels": "conda-forge,bioconda,r",
+            "envName": "base"
+        },
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.11"
+        },
+        "ghcr.io/rocker-org/devcontainer-features/r-apt:latest": {
+            "vscodeRSupport": "full",
+            "installDevTools": true,
+            "installRadian": true,
+            "installRMarkdown": true,
+            "installVscDebugger": true
+        },
+        "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+            "packages": "r-cran-data.table,r-cran-tidyverse",
+            "upgradePackages": true
+        }
+    },
+    "overrideFeatureInstallOrder": [
+        "ghcr.io/mamba-org/devcontainer-features/micromamba",
+        "ghcr.io/rocker-org/devcontainer-features/apt-packages:1",
+        "ghcr.io/rocker-org/devcontainer-features/r-apt"
+    ],
+    "mounts": [
+        "source=python_packages,target=/opt/conda/lib/python3.11/site-packages,type=volume,consistency=cached",
+        "source=r_packages,target=/opt/conda/lib/R/library,type=volume,consistency=cached",
+        "source=${localWorkspaceFolder}/permanent_storage,target=/workspace/permanent_storage,type=bind,consistency=cached",
+        "source=${localWorkspaceFolder}/project,target=/workspace/project,type=bind,consistency=cached"
+    ],
+    "updateContentCommand": "bash setup_core.sh",
+    "postCreateCommand": "if [ ! -f ~/.devcontainer_initialized ]; then micromamba clean --all --yes && bash setup_extended.sh && touch ~/.devcontainer_initialized; fi",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "[python]": {
+                    "defaultInterpreterPath": "/opt/conda/bin/python",
+                    "editor.defaultFormatter": "ms-python.black-formatter",
+                    "editor.formatOnType": true,
+                    "editor.formatOnSave": true
+                },
+                "[jupyter]": {
+                    "themeMatplotlibPlots": true,
+                    "widgetScriptSources": [
+                        "unpkg.com",
+                        "jsdelivr.com"
+                    ]
+                },
+                "[r]": {
+                    "rterm.linux": "/usr/local/bin/radian",
+                    "r.bracketedPaste": true
+                }
+            },
+            "extensions": [
+                "ms-toolsai.jupyter",
+                "ms-python.python",
+                "reditorsupport.r",
+                "ms-vscode.vscode-typescript-next",
+                "dsznajder.es7-react-js-snippets",
+                "dbaeumer.vscode-eslint",
+                "dotjoshjohnson.xml",
+                "ms-python.debugpy",
+                "ms-python.python",
+                "ms-python.pyright",
+                "ms-toolsai.jupyter-keymap",
+                "ms-toolsai.jupyter-renderers",
+                "ms-toolsai.vscode-jupyter-cell-tags",
+                "ms-toolsai.vscode-jupyter-slideshow",
+                "redhat.vscode-xml",
+                "redhat.vscode-yaml",
+                "rdebugger.r-debugger",
+                "mikhail-arkhipov.r"
+            ]
+        }
+    },
+    "context": "devcontainer",
+    "remoteUser": "root",
+    "containerUser": "root",
+}
