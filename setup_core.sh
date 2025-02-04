@@ -8,7 +8,7 @@ micromamba install -y -n base ipykernel ipywidgets r-irkernel
 R -e 'IRkernel::installspec()'
 
 # Python data science packages
-install_packages install -y -n base $PYTHON_VER\
+install_packages $PYTHON_VER\
     numpy \
     pandas \
     scipy \
@@ -22,7 +22,7 @@ install_packages install -y -n base $PYTHON_VER\
     yaml-cpp
 
 # Jupyter packages
-install_packages install -y -n base $PYTHON_VER\
+install_packages $PYTHON_VER\
     jupyter-lsp \
     jupyterlab \
     jupyterlab-git \
@@ -31,13 +31,13 @@ install_packages install -y -n base $PYTHON_VER\
     jupyterlab_widgets
 
 # Stats packages
-install_packages install -y -n base $PYTHON_VER\
+install_packages $PYTHON_VER\
     statsmodels \
     blas \
     blas-devel
 
 # Bioinformatics packages
-install_packages install -y -n base $PYTHON_VER\
+install_packages $PYTHON_VER\
     biopython \
     bioconductor-annotationdbi \
     bioconductor-annotationfilter \
@@ -48,7 +48,7 @@ install_packages install -y -n base $PYTHON_VER\
     bioconductor-genomicfeatures
 
 # R packages
-install_packages install -y -n base $PYTHON_VER\
+install_packages $PYTHON_VER\
     r-matrix \
     r-knitr \
     r-e1071 \
@@ -62,14 +62,14 @@ install_packages install -y -n base $PYTHON_VER\
     r-tidyverse
 
 # Install r-lintr to support pre-commit lintr hook
-install_packages install -y -n base $PYTHON_VER\
+install_packages $PYTHON_VER\
     r-lintr
 
 # ----------------------------------------------------------------
 # Developer Tools: Install pre-commit so that the hook defined by
 # .pre-commit-config.yaml (created in setup_project.sh) will work.
 # ----------------------------------------------------------------
-install_packages install -y -n base $PYTHON_VER\
+install_packages $PYTHON_VER\
     pre-commit
 
 # Optionally, for any already initialized project(s) in /workspace/project,

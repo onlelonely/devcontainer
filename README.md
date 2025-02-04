@@ -32,7 +32,7 @@ This repository provides an integrated solution that:
 
 ## Dev Container Configuration
 
-The primary container configuration is defined in `devcontainer/.devcontainer/devcontainer.json`. Key highlights include:
+The primary container configuration is defined in `.devcontainer/devcontainer.json`. Key highlights include:
 
 - **Base Image:** Ubuntu 22.04.
 - **Workspace & Mounts:** Projects and persistent storage are mounted in `/workspace` with volumes for Python and R package caches.
@@ -43,7 +43,7 @@ The primary container configuration is defined in `devcontainer/.devcontainer/de
 
 ## Project Setup Scripts
 
-### `devcontainer/manage.sh`
+### `manage.sh`
 
 **Purpose:**  
 The `manage.sh` script provides quick management of your development environment by offering commands to install or remove packages, clean caches, and refresh your overall setup. It leverages robust retry logic (sourced from `utils.sh`) to handle transient network or system issues.
@@ -53,37 +53,37 @@ The `manage.sh` script provides quick management of your development environment
 - **Installing Packages:**
   - **Usage:**  
     ```bash
-    bash devcontainer/manage.sh install <category:package> [-s|--save]
+    bash manage.sh install <category:package> [-s|--save]
     ```
   - **Details:**  
     Installs a package into the environment. The optional `-s` or `--save` flag appends the package to the relevant category section in `setup_extended.sh`. This ensures that the package installation is preserved for future container builds.
   - **Example:**  
     To install the Python package `numpy` under the default "New packages" category and save it:
     ```bash
-    bash devcontainer/manage.sh install numpy -s
+    bash manage.sh install numpy -s
     ```
     To install an R package (for example, `ggplot2`) under the `r` category:
     ```bash
-    bash devcontainer/manage.sh install r:ggplot2 -s
+    bash manage.sh install r:ggplot2 -s
     ```
 
 - **Removing Packages:**
   - **Usage:**  
     ```bash
-    bash devcontainer/manage.sh remove <category:package> [-s|--save]
+    bash manage.sh remove <category:package> [-s|--save]
     ```
   - **Details:**  
     This command removes a package from the environment. The optional `-s` or `--save` flag simultaneously removes the package entry from `setup_extended.sh`.
   - **Example:**  
     To remove the Python package `numpy` and update the script:
     ```bash
-    bash devcontainer/manage.sh remove numpy -s
+    bash manage.sh remove numpy -s
     ```
 
 - **Cleaning Package Caches:**
   - **Usage:**  
     ```bash
-    bash devcontainer/manage.sh clean
+    bash manage.sh clean
     ```
   - **Details:**  
     Cleans all package caches using micromamba, helping resolve issues related to stale caches or disk space.
@@ -91,12 +91,12 @@ The `manage.sh` script provides quick management of your development environment
 - **Refreshing the Environment:**
   - **Usage:**  
     ```bash
-    bash devcontainer/manage.sh refresh
+    bash manage.sh refresh
     ```
   - **Details:**  
     Resets the dev container environment by deleting the initialization flag and re-running both `setup_core.sh` and `setup_extended.sh`. This is particularly useful after making changes to the setup scripts or package configurations.
 
-### `devcontainer/setup_project.sh`
+### `setup_project.sh`
 
 **Purpose:**  
 Provides an interactive project initialization with customizable options.
@@ -113,17 +113,17 @@ Provides an interactive project initialization with customizable options.
 
 The container's package installation is managed by a set of scripts that leverage micromamba along with built-in retry logic provided by `utils.sh`:
 
-### `devcontainer/utils.sh`
+### `utils.sh`
 
 - **Purpose:**  
   Provides helper functions that add robustness to package installations or removals by retrying the command up to three times with exponential back-off.
 
-### `devcontainer/setup_core.sh`
+### `setup_core.sh`
 
 - **Purpose:**  
   Installs essential packages required for a basic data science environment including Jupyter kernels, core Python data science libraries, bioinformatics tools, and developer utilities such as pre-commit.
 
-### `devcontainer/setup_extended.sh`
+### `setup_extended.sh`
 
 - **Purpose:**  
   Augments your setup by installing a wide-ranging suite of additional packages. This script covers Bioconductor packages, additional Python and R libraries, as well as system-level utilities.
@@ -143,10 +143,10 @@ To get started with your development environment:
 
 3. **Project Initialization:**
    - **Interactive Setup with Pre-commit Hooks:**  
-     Run `bash devcontainer/setup_project.sh` to walk through project initialization, including Git setup, pre-commit configuration, and optional README.md generation.
+     Run `bash setup_project.sh` to walk through project initialization, including Git setup, pre-commit configuration, and optional README.md generation.
 
 4. **Manage Packages:** 
-   - Run `bash devcontainer/manage.sh` from the terminal (inside or outside the container) to manage your environment or update packages.
+   - Run `bash manage.sh` from the terminal (inside or outside the container) to manage your environment or update packages.
 
 5. **Persistent Storage:**
    - The `permanent_storage` directory is mounted into the container. It holds your configuration files, datasets, logs, and model files—ensuring data continuity even if the container is rebuilt.

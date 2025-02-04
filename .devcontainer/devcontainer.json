@@ -3,6 +3,7 @@
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
     "context": "../..",
     "workspaceFolder": "/workspace",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
     "features": {
         "ghcr.io/mamba-org/devcontainer-features/micromamba:1": {
             "version": "latest",
@@ -35,8 +36,8 @@
         "source=${localWorkspaceFolder}/permanent_storage,target=/workspace/permanent_storage,type=bind,consistency=cached",
         "source=${localWorkspaceFolder}/project,target=/workspace/project,type=bind,consistency=cached"
     ],
-    "updateContentCommand": "bash setup_core.sh",
-    "postCreateCommand": "if [ ! -f ~/.devcontainer_initialized ]; then micromamba clean --all --yes && bash setup_extended.sh && touch ~/.devcontainer_initialized; fi",
+    "updateContentCommand": "bash /workspace/setup_core.sh",
+    "postCreateCommand": "if [ ! -f ~/.devcontainer_initialized ]; then micromamba clean --all --yes && bash /workspace/setup_extended.sh && touch ~/.devcontainer_initialized; fi",
     "customizations": {
         "vscode": {
             "settings": {
@@ -80,7 +81,6 @@
             ]
         }
     },
-    "context": "devcontainer",
     "remoteUser": "root",
     "containerUser": "root",
 }

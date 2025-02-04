@@ -1,10 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 source utils.sh
-PYTHON_VER="$PYTHON_VER"
+PYTHON_VER="python=3.11"
 
 # Bioconductor core packages
-install_packages install -y -n base \
+install_packages \
     bioconductor-biocgenerics \
     bioconductor-biocparallel \
     bioconductor-s4vectors \
@@ -15,7 +15,7 @@ install_packages install -y -n base \
     bioconductor-genomeinfodbdata
 
 # Bioconductor genomics packages
-install_packages install -y -n base \
+install_packages  \
     bioconductor-bsgenome \
     bioconductor-bsgenome.hsapiens.ucsc.hg38 \
     bioconductor-genomicranges \
@@ -25,7 +25,7 @@ install_packages install -y -n base \
     bioconductor-rtracklayer
 
 # Bioconductor annotation packages
-install_packages install -y -n base \
+install_packages  \
     bioconductor-ensembldb \
     bioconductor-org.hs.eg.db \
     bioconductor-txdb.hsapiens.ucsc.hg38.knowngene \
@@ -33,7 +33,7 @@ install_packages install -y -n base \
     bioconductor-variantannotation
 
 # Bioconductor array and data packages
-install_packages install -y -n base \
+install_packages  \
     bioconductor-affy \
     bioconductor-affyio \
     bioconductor-affxparser \
@@ -43,7 +43,7 @@ install_packages install -y -n base \
     bioconductor-preprocesscore
 
 # Bioconductor statistics and analysis
-install_packages install -y -n base \
+install_packages  \
     bioconductor-delayedarray \
     bioconductor-delayedmatrixstats \
     bioconductor-limma \
@@ -52,7 +52,7 @@ install_packages install -y -n base \
     bioconductor-summarizedexperiment
 
 # Bioconductor utilities
-install_packages install -y -n base \
+install_packages  \
     bioconductor-biocfilecache \
     bioconductor-biocio \
     bioconductor-biovizbase \
@@ -64,7 +64,7 @@ install_packages install -y -n base \
     bioconductor-rsamtools
 
 # Python core packages
-install_packages install -y -n base $PYTHON_VER\
+install_packages $PYTHON_VER\
     beautifulsoup4 \
     brotli \
     brotli-bin \
@@ -78,7 +78,7 @@ install_packages install -y -n base $PYTHON_VER\
     scikit-learn
 
 # Jupyter and notebook related
-install_packages install -y -n base $PYTHON_VER\
+install_packages $PYTHON_VER\
     jsonpatch \
     jsonpointer \
     jsonschema \
@@ -95,7 +95,7 @@ install_packages install -y -n base $PYTHON_VER\
     prompt-toolkit
 
 # System and utility packages
-install_packages install -y -n base $PYTHON_VER\
+install_packages $PYTHON_VER\
     libjpeg-turbo \
     libsqlite \
     nodejs \
@@ -106,7 +106,7 @@ install_packages install -y -n base $PYTHON_VER\
     stack_data
 
 # R base packages (part 1)
-install_packages install -y -n base \
+install_packages  \
     r-reshape2 \
     r-xml2 \
     r-rjsonio \
@@ -122,7 +122,7 @@ install_packages install -y -n base \
     r-foreach
 
 # R base packages (part 2)
-install_packages install -y -n base \
+install_packages  \
     r-forecast \
     r-foreign \
     r-formatr \
@@ -137,7 +137,7 @@ install_packages install -y -n base \
     r-future.apply
 
 # R statistics and visualization (part 1)
-install_packages install -y -n base \
+install_packages  \
     r-haven \
     r-hmisc \
     r-hms \
@@ -152,7 +152,7 @@ install_packages install -y -n base \
     r-isoband
 
 # R statistics and visualization (part 2)
-install_packages install -y -n base \
+install_packages  \
     r-iterators \
     r-jpeg \
     r-labeling \
@@ -167,7 +167,7 @@ install_packages install -y -n base \
     r-listenv
 
 # R core utilities (part 1)
-install_packages install -y -n base \
+install_packages  \
     r-openssl \
     r-operator.tools \
     r-parallelly \
@@ -184,7 +184,7 @@ install_packages install -y -n base \
     r-purrr
 
 # R core utilities (part 2)
-install_packages install -y -n base \
+install_packages  \
     r-r6 \
     r-randomforest \
     r-rcpp \
@@ -199,7 +199,7 @@ install_packages install -y -n base \
     r-rstudioapi
 
 # R additional packages (part 1)
-install_packages install -y -n base \
+install_packages  \
     r-shape \
     r-slider \
     r-stringi \
@@ -212,7 +212,7 @@ install_packages install -y -n base \
     r-tzdb
 
 # R additional packages (part 2)
-install_packages install -y -n base \
+install_packages  \
     r-urlchecker \
     r-urltools \
     r-usethis \
@@ -225,7 +225,7 @@ install_packages install -y -n base \
     r-viridislite
 
 # R final packages
-install_packages install -y -n base \
+install_packages  \
     r-vroom \
     r-waldo \
     r-warp \
