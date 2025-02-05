@@ -37,9 +37,13 @@ install_packages  \
     bioconductor-affy \
     bioconductor-affyio \
     bioconductor-affxparser \
+    bioconductor-affycoretools \
     bioconductor-oligo \
     bioconductor-oligoclasses \
     bioconductor-pd.hugene.1.0.st.v1 \
+    bioconductor-pd.clariom.s.human \
+    bioconductor-pd.clariom.s.rat \
+    bioconductor-pd.clariom.s.mouse \
     bioconductor-preprocesscore
 
 # Bioconductor statistics and analysis
@@ -242,3 +246,12 @@ install_packages  \
     r-yardstick \
     r-zip \
     r-zoo
+    
+# Bioconductor enrichment analysis
+install_packages  \
+    bioconductor-clusterprofiler \
+    bioconductor-gsva \
+    r-msigdbr \
+    bioconductor-enrichplot \
+    r-pheatmap \
+    bioconductor-biomaRt

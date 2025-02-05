@@ -33,7 +33,6 @@
     "mounts": [
         "source=python_packages,target=/opt/conda/lib/python3.11/site-packages,type=volume,consistency=cached",
         "source=r_packages,target=/opt/conda/lib/R/library,type=volume,consistency=cached",
-        "source=${localWorkspaceFolder}/permanent_storage,target=/workspace/permanent_storage,type=bind,consistency=cached",
         "source=${localWorkspaceFolder}/project,target=/workspace/project,type=bind,consistency=cached"
     ],
     "updateContentCommand": "bash /workspace/setup_core.sh",
