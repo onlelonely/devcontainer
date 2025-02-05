@@ -6,6 +6,9 @@ project_base="project"
 read -p "Enter your project name: " project_name
 script_project="$(realpath ${project_base}/${project_name})"
 
+project_base="project"
+script_project="${project_base}/${project_name}"
+
 # Create project folder structure within the workspace
 mkdir -p "${script_project}/src/"
 mkdir -p "${script_project}/generated_data/"
