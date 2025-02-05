@@ -2,10 +2,9 @@
 set -euo pipefail
 
 # Ask for the project name
-read -p "Enter your project name: " project_name
-
 project_base="project"
-script_project="${project_base}/${project_name}"
+read -p "Enter your project name: " project_name
+script_project="$(realpath ${project_base}/${project_name})"
 
 # Create project folder structure within the workspace
 mkdir -p "${script_project}/src/"
